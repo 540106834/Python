@@ -1,150 +1,130 @@
-非常好 ✅
-你明确方向是 **SRE（Site Reliability Engineering）监控方向**，那就更聚焦了。
-
-Python 在 SRE 场景中是非常强大的工具，用于：
-
-* 自动化运维（任务调度、巡检）
-* 指标采集与分析（Prometheus / Grafana / Elastic）
-* 告警管理与推送（Alertmanager / Slack / 飞书）
-* 服务健康检查、依赖检测
-* 可视化与报表生成
+太好了 😄
+既然你想学习 **Python + Kubernetes + Prometheus**，我给你整理一份 **系统化学习路线**，从基础到实战，专注 SRE / 监控方向，顺便结合我们之前写的脚本实践。
 
 ---
 
-## 🧭 Python 学习路线 — SRE 监控实战方向
+# 🐍 Python 学习路线（面向 K8s + Prometheus 监控）
 
-> 🎯 **目标**：用 Python 打造「监控自动化体系」，能独立开发工具脚本、分析指标、管理告警。
+## **阶段 1：Python 基础 + 运维脚本**
 
----
+目标：能写自动化脚本，处理文件、日志、异常。
 
-### 🧩 阶段 1：巩固基础 + 面向 SRE 的语法强化
+### 1️⃣ 基础语法
 
-> 目标：掌握写监控脚本所需语法
+* 数据类型：int, float, str, bool, list, dict, tuple, set
+* 条件语句、循环语句、函数
+* 文件操作：读取/写入日志、JSON/YAML
+* 异常处理：try/except/finally
+* 模块与导入：`import os, sys, logging, requests, yaml`
 
-**重点知识**
+### 2️⃣ 小练习
 
-* Python 基础：变量、条件、循环、函数
-* 文件读写（日志、配置文件）
-* 异常与错误处理
-* 模块与导入
-* 命令行参数处理（`sys.argv`、`argparse`）
-* JSON / YAML 数据解析（API & 配置文件）
-
-📘 **实战练习**
-
-* 写一个“检查进程是否运行”的脚本
-* 读取 JSON/YAML 配置并输出监控目标
-* 自动读取日志统计错误次数
+* 日志轮转脚本
+* 读取 YAML 配置并打印服务列表
+* 异常保护脚本，例如网络请求失败重试
 
 ---
 
-### ⚙️ 阶段 2：监控脚本核心能力（API / 告警 / SSH）
+## **阶段 2：面向 SRE 的 Python**
 
-> 目标：能与主流监控系统交互、执行远程任务
+目标：学会处理监控指标，写可自动告警的脚本。
 
-**常用库**
+### 1️⃣ 文件与日志操作
 
-| 模块                       | 功能                                               |
-| ------------------------ | ------------------------------------------------ |
-| `requests`               | 调用 HTTP API（Prometheus / Alertmanager / Grafana） |
-| `paramiko`               | SSH 登录远程主机执行命令                                   |
-| `subprocess`             | 执行本地 shell 命令                                    |
-| `smtplib`, `email`       | 发送邮件告警                                           |
-| `json`, `re`, `datetime` | 数据解析、正则提取、时间处理                                   |
+* 日志模块 `logging` 配置文件输出
+* 保存监控结果到本地文件/数据库
 
-📘 **实战练习**
+### 2️⃣ 命令行参数 + 自动化
 
-1. 调用 Prometheus API 获取 CPU 使用率
-2. 查询 Alertmanager 当前活跃告警
-3. 批量 SSH 登录节点执行健康检查命令
-4. 检测 HTTP 服务是否 200，异常发送邮件
+* `argparse` 使用
+* 配置可通过命令行覆盖
+* cron/计划任务自动化执行
 
----
+### 3️⃣ JSON / YAML 解析
 
-### 📊 阶段 3：数据分析与报表输出
-
-> 目标：能对监控数据进行可视化与报表生成
-
-**推荐模块**
-
-* `pandas`：表格型数据分析（指标汇总、TOPN）
-* `matplotlib`：绘制趋势图
-* `openpyxl`：生成 Excel 报表
-* `schedule` / `apscheduler`：定时执行任务
-
-📘 **实战练习**
-
-* 从 Prometheus 导出时序数据并生成 Excel 报表
-* 每日报警统计并自动发送邮件/Slack
-* 绘制某服务的 7 天响应时间趋势图
+* `json.load` / `yaml.safe_load`
+* 从 API 返回的 JSON 提取指标数据
+* 保存结果为 JSON/YAML
 
 ---
 
-### ☸️ 阶段 4：监控系统集成与自动化
+## **阶段 3：Python + Prometheus**
 
-> 目标：构建自己的“小型监控运维工具集”
+目标：从 Prometheus 获取指标，进行告警判断。
 
-**场景示例**
+### 1️⃣ HTTP + Requests
 
-* 🔹 **Prometheus**
+* Python 请求 API：`requests.get(url, params=...)`
+* 处理 JSON 返回结果
 
-  * 调用 API 查询指标
-  * 自动检测 Job/Target 掉线并告警
-* 🔹 **Alertmanager**
+### 2️⃣ Prometheus API 查询
 
-  * 定时统计告警类型与数量
-  * 生成每日告警报告
-* 🔹 **Grafana**
+* 实例：查询 Pod CPU 使用率
+* 多服务、多指标数据抓取
 
-  * 调用 HTTP API 导出仪表板 JSON
-  * 批量备份 / 创建 Dashboard
-* 🔹 **Kubernetes**
+### 3️⃣ 多级告警
 
-  * 通过 Python client 检查 Pod 状态、资源使用
-  * 自动重启异常 Pod（可配合告警系统）
+* 普通告警 / 高级告警
+* 飞书/Slack/邮件推送
+* 异常保护 + 日志记录
 
-📘 **实战练习**
+### 练习
 
-* “Prometheus 告警日报生成脚本”
-* “Grafana 仪表板自动备份工具”
-* “K8s Pod 健康检测 + 自动修复脚本”
+* 写一个脚本获取 CPU/Memory 指标，超过阈值告警
+* 支持 YAML 配置，能通过命令行覆盖阈值
 
 ---
 
-### 🚀 阶段 5：SRE 项目实战（整合练习）
+## **阶段 4：Python + Kubernetes**
 
-> 目标：用 Python 打造一个完整的 SRE 自动化项目
+目标：直接获取 K8s Pod 指标，结合 Prometheus 告警。
 
-📗 **项目示例**
+### 1️⃣ K8s API & Python Client
 
-1. **监控健康检查系统**
+* 安装 `pip install kubernetes`
+* 使用 `config.load_kube_config()` / `config.load_incluster_config()`
+* 读取 Pod 列表、Pod 资源使用情况
 
-   * 定时调用各服务接口
-   * 结果写入 Prometheus 自定义指标
-   * 异常自动推送飞书/Slack 告警
+### 2️⃣ Metrics API
 
-2. **告警统计与报表系统**
+* 获取 `metrics.k8s.io/v1beta1` CPU / Memory
+* 聚合 Pod 指标
+* 与 Prometheus 指标结合
 
-   * 采集 Alertmanager 告警
-   * 按业务/级别汇总
-   * 每日生成 Excel + 邮件推送
+### 练习
 
-3. **资源巡检系统**
-
-   * SSH 获取节点 CPU/内存/磁盘数据
-   * 与历史阈值比较
-   * 生成日报与趋势图
+* 写脚本获取指定命名空间的 Pod CPU/Memory
+* 支持服务名过滤
+* 多级告警 + 自动推送
 
 ---
 
-我可以帮你把这套路线拆成：
+## **阶段 5：实战项目**
 
-* 📆 **30 天学习计划**（每天 1~2 小节 + 小练习）
-* 或者直接进入 **实战模块教学**（如：Prometheus API 脚本）
+目标：写一个企业级 SRE 监控脚本（之前整合的模板）。
+
+* 配置驱动 YAML
+* 支持 Prometheus / K8s API
+* 多级告警（普通/高级）
+* 飞书/Slack/邮件告警
+* 日志记录
+* 命令行参数覆盖配置
+* cron 自动执行
+
+> 💡 结合之前整合的生产级模板练习，可直接部署测试
 
 ---
 
-你希望我帮你：
-A. 制定一份「30 天 Python for SRE 学习计划」
-B. 直接开始写第一个实战脚本（比如 Prometheus 指标采集 / 告警日报）
-选一个方向我就带你进入实操。
+## **阶段 6：扩展 / 高级**
+
+* 添加磁盘、网络、Pod 重启次数指标
+* 历史趋势分析 + 报表
+* 多集群巡检
+* 告警抑制策略、告警去重
+
+---
+
+如果你愿意，我可以帮你画一个 **Python + K8s + Prometheus 学习路线图图表**，
+把阶段、练习、实战项目清晰可视化，让你一目了然地跟着学。
+
+你希望我画吗？
