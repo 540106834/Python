@@ -1,15 +1,11 @@
-太好了 😄
-既然你想学习 **Python + Kubernetes + Prometheus**，我给你整理一份 **系统化学习路线**，从基础到实战，专注 SRE / 监控方向，顺便结合我们之前写的脚本实践。
 
----
-
-# 🐍 Python 学习路线（面向 K8s + Prometheus 监控）
+#  Python 学习路线（面向 K8s + Prometheus 监控）
 
 ## **阶段 1：Python 基础 + 运维脚本**
 
 目标：能写自动化脚本，处理文件、日志、异常。
 
-### 1️⃣ 基础语法
+### 1️ 基础语法
 
 * 数据类型：int, float, str, bool, list, dict, tuple, set
 * 条件语句、循环语句、函数
@@ -17,7 +13,7 @@
 * 异常处理：try/except/finally
 * 模块与导入：`import os, sys, logging, requests, yaml`
 
-### 2️⃣ 小练习
+### 2️ 小练习
 
 * 日志轮转脚本
 * 读取 YAML 配置并打印服务列表
@@ -29,18 +25,18 @@
 
 目标：学会处理监控指标，写可自动告警的脚本。
 
-### 1️⃣ 文件与日志操作
+### 1️ 文件与日志操作
 
 * 日志模块 `logging` 配置文件输出
 * 保存监控结果到本地文件/数据库
 
-### 2️⃣ 命令行参数 + 自动化
+### 2️ 命令行参数 + 自动化
 
 * `argparse` 使用
 * 配置可通过命令行覆盖
 * cron/计划任务自动化执行
 
-### 3️⃣ JSON / YAML 解析
+### 3️ JSON / YAML 解析
 
 * `json.load` / `yaml.safe_load`
 * 从 API 返回的 JSON 提取指标数据
@@ -52,17 +48,17 @@
 
 目标：从 Prometheus 获取指标，进行告警判断。
 
-### 1️⃣ HTTP + Requests
+### 1️ HTTP + Requests
 
 * Python 请求 API：`requests.get(url, params=...)`
 * 处理 JSON 返回结果
 
-### 2️⃣ Prometheus API 查询
+### 2️ Prometheus API 查询
 
 * 实例：查询 Pod CPU 使用率
 * 多服务、多指标数据抓取
 
-### 3️⃣ 多级告警
+### 3️ 多级告警
 
 * 普通告警 / 高级告警
 * 飞书/Slack/邮件推送
@@ -79,13 +75,13 @@
 
 目标：直接获取 K8s Pod 指标，结合 Prometheus 告警。
 
-### 1️⃣ K8s API & Python Client
+### 1️ K8s API & Python Client
 
 * 安装 `pip install kubernetes`
 * 使用 `config.load_kube_config()` / `config.load_incluster_config()`
 * 读取 Pod 列表、Pod 资源使用情况
 
-### 2️⃣ Metrics API
+### 2️ Metrics API
 
 * 获取 `metrics.k8s.io/v1beta1` CPU / Memory
 * 聚合 Pod 指标
@@ -111,7 +107,7 @@
 * 命令行参数覆盖配置
 * cron 自动执行
 
-> 💡 结合之前整合的生产级模板练习，可直接部署测试
+>  结合之前整合的生产级模板练习，可直接部署测试
 
 ---
 
@@ -122,9 +118,3 @@
 * 多集群巡检
 * 告警抑制策略、告警去重
 
----
-
-如果你愿意，我可以帮你画一个 **Python + K8s + Prometheus 学习路线图图表**，
-把阶段、练习、实战项目清晰可视化，让你一目了然地跟着学。
-
-你希望我画吗？
