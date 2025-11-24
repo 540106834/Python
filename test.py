@@ -1,5 +1,2 @@
-a=15
-b=14
-
-print("a + b =", a + b)
-print("a - b =", a - b) 
+with open("app.log", "r") as f:
+    print(f.read())
